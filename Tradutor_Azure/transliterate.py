@@ -1,20 +1,21 @@
 import requests, uuid, json
 from config import AZURE_KEY, AZURE_ENDPOINT, AZURE_LOCATION
-from texto_json import texto_para_json, json_para_texto_traducao
+from texto_json import texto_para_json, json_para_texto_transliteracao
 
 key = AZURE_KEY
 endpoint = AZURE_ENDPOINT
 location = AZURE_LOCATION
 
-def translate(texto, idioma_origem, idioma_destino):
-    path = '/translate'
+def transliterate(texto, idioma_origem, pais_origem):
+    path = '/transliterate'
     constructed_url = endpoint + path
 
     params = {
-    'api-version': '3.0',
-    'from': idioma_origem,
-    'to': idioma_destino
-    }
+    'api-version': '3.0',    
+    'language': idioma_origem,
+    'fromScript': pais_origem,
+    'toScript': 'latn'
+}
 
     headers = {
     'Ocp-Apim-Subscription-Key': key,
@@ -29,8 +30,4 @@ def translate(texto, idioma_origem, idioma_destino):
     request = requests.post(constructed_url, params=params, headers=headers, json=body)
     response = request.json()
 
-    return json_para_texto_traducao(response)
-
-    
-    
-    
+    return json_para_texto_transliteracao(response)

@@ -1,4 +1,5 @@
 from translate import translate
+from transliterate import transliterate
 
 
 texto = """Marvin is a diligent policeman. 
@@ -16,9 +17,11 @@ After work, Marvin arrives to find his house on fire. Stunned and confused, Marv
 The fireman replies, "It’s because the homeowner forgot to turn off the stove."
 """
 
-traducao = translate(texto,'en','pt')
+traducao = translate(texto,'','ja')
+transliteracao = transliterate(traducao, 'ja', 'Jpan')
 
 print("*** Texto original ***\n",texto)
 print("\n*** Texto traduzido ***\n",traducao)
+print("\n*** Transliteração ***\n",transliteracao)
 
 
